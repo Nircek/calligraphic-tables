@@ -1,0 +1,93 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: serif;
+  margin: 1em;
+}
+
+header {
+  margin-bottom: 0.5em;
+}
+
+textarea {
+  width: 100%;
+  resize: vertical;
+  min-height: 6em;
+  font-family: monospace;
+  font-size: 0.9em;
+}
+
+/* Anchor points */
+.anchor {
+  display: none;
+  justify-content: space-between;
+  color: #999;
+  font-size: 0.6em;
+  font-family: monospace;
+  max-width: max-content;
+}
+
+/* Tables */
+table {
+  border-collapse: collapse;
+  margin: 0 auto;
+}
+
+/* First row: Unicode labels — no borders, very small text */
+.unicode-row td {
+  border: none;
+  font-size: 0.45em;
+  text-align: center;
+  white-space: nowrap;
+  padding: 0 1px;
+  line-height: 1.2;
+  font-family: monospace;
+}
+
+/* Second, third, fourth rows: visible borders */
+.char-row td,
+.practice-row td {
+  border: 1px solid black;
+  width: 2em;
+  height: 2em;
+  text-align: center;
+  vertical-align: middle;
+  padding: 0;
+}
+
+/* Handwriting paper effect on empty practice rows */
+.practice-row td {
+  background-image:
+    linear-gradient(lightblue, lightblue),
+    linear-gradient(rgba(180, 0, 0, 0.35), rgba(180, 0, 0, 0.35)),
+    linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)),
+    linear-gradient(lightblue, lightblue);
+  background-repeat: no-repeat;
+  background-size: 100% 1px, 100% 2px, 100% 1px, 100% 1px;
+  background-position: 0% 100%, 0% 66%, 0% 33%, 0% 0%;
+}
+
+/* Print styles */
+@media print {
+  textarea {
+    display: none;
+  }
+
+  header {
+    display: none;
+  }
+
+  .anchor {
+    display: flex;
+  }
+
+  table {
+    margin: 0 auto;
+  }
+
+  body {
+    margin: 0;
+  }
+}
