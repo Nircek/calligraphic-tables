@@ -29,7 +29,7 @@ ABCDEFGHIJKLMNOPQRSTUVWXYZ
 αβγδεζηθικλμνξοπρστυφχψω
 ąćłżäßéàâçñíčďůșāøþœŋ
 ΓΔΘΛΞΠΣΥΦΨΩϵϑϰϱςϕ
-+-±×÷=≠<>≤≈≟≝
++-±×÷=≠&lt;&gt;≤≈≟≝
 ∀∃∄¬∧∨∅⊂⋃ℵℶℸ∴
 ∎∞∂∇∮∢⊕○⬡
 ℕℤℚℝℂ𝔻⭠↦⇒⇔⇌
@@ -56,7 +56,7 @@ ABCDEFGHIJKLMNOPQRSTUVWXYZ
    - The structure of each table must be:
      * Exactly 4 rows (`<tr>`).
      * The number of columns (`<td>`) must equal the number of characters in that specific line.
-     * First row: Each cell must contain the Unicode hex value (e.g., U+0041) corresponding to the character directly below it. 
+     * First row: Each cell must contain the Unicode hex value (e.g., U+0041) corresponding to the character directly below it.
      * Second row: Each cell contains one sequential character from the text line.
      * Third and fourth rows: All cells are empty.
    - Add anchor points with text "Nircek/calligraphic-tables". It should appear below and above each table.
