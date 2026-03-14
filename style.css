@@ -26,13 +26,17 @@ textarea {
   color: #999;
   font-size: 0.6em;
   font-family: monospace;
-  max-width: max-content;
+}
+
+/* Table block wrapper */
+.table-block {
+  width: fit-content;
+  margin: 0 auto;
 }
 
 /* Tables */
 table {
   border-collapse: collapse;
-  margin: 0 auto;
 }
 
 /* First row: Unicode labels — no borders, very small text */
@@ -58,15 +62,17 @@ table {
 }
 
 /* Handwriting paper effect on empty practice rows */
+/* 3:5:3 calligraphy proportions with 15% top/bottom padding */
+/* Lines: ascender(15%), waist(34%), base(66%), descender(85%) */
 .practice-row td {
   background-image:
     linear-gradient(lightblue, lightblue),
-    linear-gradient(rgba(180, 0, 0, 0.35), rgba(180, 0, 0, 0.35)),
     linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)),
+    linear-gradient(rgba(180, 0, 0, 0.35), rgba(180, 0, 0, 0.35)),
     linear-gradient(lightblue, lightblue);
   background-repeat: no-repeat;
-  background-size: 100% 1px, 100% 2px, 100% 1px, 100% 1px;
-  background-position: 0% 100%, 0% 66%, 0% 33%, 0% 0%;
+  background-size: 100% 1px, 100% 1px, 100% 2px, 100% 1px;
+  background-position: 0 15%, 0 34%, 0 66%, 0 85%;
 }
 
 /* Print styles */
@@ -83,11 +89,31 @@ table {
     display: flex;
   }
 
-  table {
+  .table-block {
     margin: 0 auto;
   }
 
   body {
     margin: 0;
+  }
+
+  .char-row td,
+  .practice-row td {
+    border: 1px solid black !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .practice-row td {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    background-image:
+      linear-gradient(grey, grey),
+      linear-gradient(grey, grey),
+      linear-gradient(grey, grey),
+      linear-gradient(grey, grey);
+    background-repeat: no-repeat;
+    background-size: 100% 1px, 100% 1px, 100% 2px, 100% 1px;
+    background-position: 0 15%, 0 34%, 0 66%, 0 85%;
   }
 }

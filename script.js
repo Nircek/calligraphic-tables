@@ -27,7 +27,13 @@ function processLine(line) {
     if (codePoints.length === 0) continue;
     const baseCP = codePoints[0];
     if (shouldSkip(baseCP)) continue;
-    chars.push(baseCP);
+    let display = String.fromCodePoint(baseCP);
+    for (let i = 1; i < codePoints.length; i++) {
+      if (isVariationSelector(codePoints[i])) {
+        display += String.fromCodePoint(codePoints[i]);
+      }
+    }
+    chars.push({ cp: baseCP, display });
   }
   return chars;
 }
@@ -39,18 +45,19 @@ function toHex(cp) {
 function makeAnchor() {
   const el = document.createElement('div');
   el.className = 'anchor';
-  const left = document.createElement('span');
-  left.textContent = 'Nircek/calligraphic-tables';
-  const right = document.createElement('span');
-  right.textContent = 'Nircek/calligraphic-tables';
-  el.appendChild(left);
-  el.appendChild(right);
+  const text = 'Nircek/calligraphic-tables';
+  for (const ch of text) {
+    const span = document.createElement('span');
+    span.textContent = ch;
+    el.appendChild(span);
+  }
   return el;
 }
 
 function buildTables() {
   container.innerHTML = '';
   const lines = textarea.value.split('\n');
+  let lastBlock = null;
 
   for (const line of lines) {
     if (!line.trim()) continue;
@@ -58,7 +65,9 @@ function buildTables() {
     const chars = processLine(line);
     if (chars.length === 0) continue;
 
-    container.appendChild(makeAnchor());
+    const block = document.createElement('div');
+    block.className = 'table-block';
+    block.appendChild(makeAnchor());
 
     const table = document.createElement('table');
 
@@ -71,13 +80,13 @@ function buildTables() {
     const row4 = document.createElement('tr');
     row4.className = 'practice-row';
 
-    for (const cp of chars) {
+    for (const char of chars) {
       const td1 = document.createElement('td');
-      td1.textContent = toHex(cp);
+      td1.textContent = toHex(char.cp);
       row1.appendChild(td1);
 
       const td2 = document.createElement('td');
-      td2.textContent = String.fromCodePoint(cp);
+      td2.textContent = char.display;
       row2.appendChild(td2);
 
       row3.appendChild(document.createElement('td'));
@@ -88,9 +97,13 @@ function buildTables() {
     table.appendChild(row2);
     table.appendChild(row3);
     table.appendChild(row4);
-    container.appendChild(table);
+    block.appendChild(table);
+    container.appendChild(block);
+    lastBlock = block;
+  }
 
-    container.appendChild(makeAnchor());
+  if (lastBlock) {
+    lastBlock.appendChild(makeAnchor());
   }
 }
 
