@@ -105,8 +105,6 @@ table {
   }
 
   .practice-row td {
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
     background-image:
       linear-gradient(grey, grey),
       linear-gradient(grey, grey),
