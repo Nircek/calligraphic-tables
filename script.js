@@ -8,14 +8,14 @@ const textarea = document.getElementById('input');
 const container = document.getElementById('tables-container');
 
 const segmenter = new Intl.Segmenter(undefined, { granularity: 'grapheme' });
+const FILTERED_CATEGORIES = /^[\p{Cc}\p{Cf}\p{Co}\p{Cs}\p{Cn}]$/u;
 
 function isVariationSelector(cp) {
   return (cp >= 0xFE00 && cp <= 0xFE0F) || (cp >= 0xE0100 && cp <= 0xE01EF);
 }
 
 function shouldSkip(cp) {
-  const ch = String.fromCodePoint(cp);
-  if (/^[\p{Cc}\p{Cf}\p{Co}\p{Cs}\p{Cn}]$/u.test(ch)) return true;
+  if (FILTERED_CATEGORIES.test(String.fromCodePoint(cp))) return true;
   if (isVariationSelector(cp)) return true;
   return false;
 }
